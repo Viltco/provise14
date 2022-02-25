@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kra_info,access.kra.info,model_kra_info,,1,1,1,1
+access_kpi_info,access.kpi.info,model_kpi_info,,1,1,1,1
+access_kpi_data,access.kpi.data,model_kpi_data,,1,1,1,1
+access_kpi_score,access.kpi.score,model_kpi_score,,1,1,1,1
+access_kpi_notebook,access.kpi.notebook,model_kpi_notebook,,1,1,1,1
+access_kpi_lines,access.kpi.lines,model_kpi_lines,,1,1,1,1

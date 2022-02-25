@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="kpi_score_tree" model="ir.ui.view">
+        <field name="name">kpi.score.tree</field>
+        <field name="model">kpi.score</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="job_id"/>
+                <field name="department_id"/>
+                <field name="joining_date"/>
+                <field name="review_Date"/>
+                <field name="year"/>
+            </tree>
+        </field>
+    </record>
+    <record id="kpi_score_form" model="ir.ui.view">
+        <field name="name">kpi.score.form</field>
+        <field name="model">kpi.score</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="joining_date"/>
+                            <field name="year"/>
+                        </group>
+                        <group>
+                            <field name="job_id"/>
+                            <field name="partner_id"/>
+                            <field name="review_Date"/>
+                            <field name="period_review_from"/>
+                            <field name="period_review_to"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Annual Target">
+                            <field name="kpi_score_lines">
+                                <tree editable="bottom">
+                                    <field name="kra_id"/>
+                                    <field name="kra_weight"/>
+                                    <field name="kpi_id"/>
+                                    <field name="kpi_weight"/>
+                                    <field name="target"/>
+                                    <field name="achieve"/>
+                                    <field name="achievements"/>
+                                    <field name="score_a"/>
+                                    <field name="score_b"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="kpi_score_action" model="ir.actions.act_window">
+        <field name="name">KPI Score</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kpi.score</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create KPI score!
+            </p>
+        </field>
+    </record>
+
+
+    <record id="action_send_email" model="ir.actions.server">
+      <field name="name">Send Email</field>
+      <field name="model_id" ref="kpi__kra.model_kpi_score"/>
+      <field name="binding_model_id" ref="kpi__kra.model_kpi_score"/>
+      <field name="state">code</field>
+      <field name="code"> if records: action = records.send_email()</field>
+    </record>
+
+
+
+    <menuitem id="kpi_score_root"
+              name="KPI Score Info"
+              parent="bop_root"
+              action="kpi_score_action"
+              sequence="4"/>
+
+</odoo>

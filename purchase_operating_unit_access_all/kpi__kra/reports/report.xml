@@ -1,0 +1,26 @@
+<odoo>
+    <record id="paper_format_bop_report" model="report.paperformat">
+        <field name="name">BOP Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="action_bop_report"
+            string="BOP Report"
+            model="kpi.score"
+            report_type="qweb-pdf"
+            name="kpi__kra.report_bop_document"
+            file="kpi__kra.report_bop_document"
+            paperformat="paper_format_bop_report"/>
+</odoo>

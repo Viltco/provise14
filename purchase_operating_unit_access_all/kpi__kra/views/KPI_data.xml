@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="kpi_data_tree" model="ir.ui.view">
+        <field name="name">kpi.data.tree</field>
+        <field name="model">kpi.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="kpi_name"/>
+                <field name="kpi_weight"/>
+            </tree>
+        </field>
+    </record>
+    <record id="kpi_data_form" model="ir.ui.view">
+        <field name="name">kpi.data.form</field>
+        <field name="model">kpi.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="kpi_name"/>
+                        <field name="kpi_weight"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="kpi_data_action" model="ir.actions.act_window">
+        <field name="name">KPI Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kpi.data</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create KPI data!
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="kpi_data_root"
+              name="KPI Data"
+              parent="bop_root"
+              action="kpi_data_action"
+              sequence="2"/>
+
+</odoo>
