@@ -1,0 +1,218 @@
+<odoo>
+    <template id="report_bop_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="text-center">
+                            <h2>Key Performance Indicators</h2>
+                        </div>
+
+                        <t t-set="sme_pe" t-value="0"/>
+                        <t t-set="sme_bp" t-value="0"/>
+                        <t t-set="hr_pe" t-value="0"/>
+                        <t t-set="hr_bp" t-value="0"/>
+
+                        <t t-foreach="o.kpi_score_lines" t-as="s">
+                            <t t-set="sme_pe" t-value="sme_pe + s.score_b"/>
+                            <t t-set="sme_bp" t-value="sme_bp + s.kpi_weight"/>
+                            <t t-set="hr_pe" t-value="hr_pe + s.score_a"/>
+                            <t t-set="hr_bp" t-value="hr_bp + s.kra_weight"/>
+                        </t>
+                        <table class="table table-sm no-spacing table-borderless">
+                            <tr>
+                                <td>
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Employee Name</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="o['employee_id']['name']"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Department Name :</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="o['department_id']['name']"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Job Position</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="o['job_id']['name']"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Joining Date</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="o['joining_date']"/>
+                                            </td>
+                                        </tr>
+                                        <tr/>
+                                        <tr>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Year</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="o['year']"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="15%" style="text-align:left">
+                                                <strong>Line Manager</strong>
+                                            </td>
+                                            <td width="35%" style="text-align:left">
+                                                <t t-esc="o['partner_id']['name']"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td width="25%"/>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Total Score</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                -
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right" width="25%">
+                                                <strong>SME Scoring</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Point Earned</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="sme_pe"/>%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"/>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Budget Points</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="sme_bp"/>%
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td width="25%"/>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Total Score</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                -
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%" style="text-align:right">
+                                                <strong>HR Scoring</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Point Earned</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="hr_pe"/>%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"/>
+                                            <td width="25%" style="text-align:left">
+                                                <strong>Budget Points</strong>
+                                            </td>
+                                            <td width="25%" style="text-align:left">
+                                                <t t-esc="hr_bp"/>%
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table class="table table-sm no-spacing">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>&#160;</span>
+                                    </th>
+                                    <th>
+                                        <span>&#160;</span>
+                                    </th>
+                                    <th style="text-align:center">Achieve</th>
+                                    <th style="text-align:center">Target</th>
+                                    <th style="text-align:center">Achievement %</th>
+                                    <th style="text-align:center">Kra Weight%</th>
+                                    <th style="text-align:center">KPI Weight%</th>
+                                    <th style="text-align:center">Score A%</th>
+                                    <th style="text-align:center">Score B%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.kpi_score_lines" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span>&#160;</span>
+                                        </td>
+                                        <th colspan="9" style="text-align:left">
+                                            <span t-field="line.kra_id.name"/>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span>&#160;</span>
+                                        </td>
+                                        <td style="text-align:left">
+                                            <span t-field="line.kpi_id.kpi_name"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.achieve"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.target"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.achievements"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.kra_weight"/>
+                                        </td>
+                                         <td style="text-align:center">
+                                            <span t-field="line.kpi_weight"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.score_a"/>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span t-field="line.score_b"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
